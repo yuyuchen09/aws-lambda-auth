@@ -1,0 +1,22 @@
+{
+	"principalId": "ychen",
+	"policyDocument": {
+		"Version": "2012-10-17",
+		"Statement": [
+			{
+				"Condition": {},
+				"Action": "execute-api:Invoke",
+				"Resource": [],
+				"Effect": "Allow"
+			},
+			{
+				"Condition": {},
+				"Action": "execute-api:Invoke",
+				"Resource": [
+					"arn:aws:execute-api:[region]:[account_id]:[restApiId]/[stage]/*/*"
+				],
+				"Effect": "Deny"
+			}
+		]
+	}
+}

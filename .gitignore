@@ -1,0 +1,11 @@
+.classpath
+.project
+.idea
+*.iml
+target
+/build
+*/**.class
+
+#aws
+**/.aws/*
+**/.aws-sam/*
