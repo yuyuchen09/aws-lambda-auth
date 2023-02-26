@@ -42,7 +42,6 @@ For more details, see public documentation for:
 - Use API Gateway Lambda authorizers
   https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
   [Blog Post](https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/) -- [Developer Guide](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
-- Understanding ID Token
-  https://darutk.medium.com/understanding-id-token-5f83f50fa02e
+- https://jwt.io/
 - Tutorial: Build a CRUD API with Lambda and DynamoDB
   https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html#http-api-dynamo-db-create-routes
