@@ -1,7 +1,5 @@
 package backend;
 
-import java.time.Duration;
-
 public class EnvironmentWrapper {
 
     public static String get(String key) {
@@ -20,35 +18,11 @@ public class EnvironmentWrapper {
         return get("Environment");
     }
 
+    public static String getTableName() {
+        return get("TableName");
+    }
+
     public static String getRegion() {
         return get("AWS_REGION");
-    }
-
-    public static Duration getApacheConnectionTimeout() {
-        return getAsDuration("apacheConnectionTimeout", 60l);
-    }
-
-    public static Duration getApacheSocketTimeout() {
-        return getAsDuration("apacheSocketTimeout", 60l);
-    }
-
-    public static Duration getApacheConnectionAcquisitionTimeout() {
-        return getAsDuration("apacheConnectionAcquisitionTimeout", 60l);
-    }
-
-    public static int getMaxRetries() {
-        return Integer.parseInt(get("maxRetries"));
-    }
-
-    public static int getRetryDelay() {
-        return Integer.parseInt(get("retryDelay"));
-    }
-
-    private static Duration getAsDuration(String key, long defaultValue) {
-        try {
-            return Duration.ofSeconds(Long.parseLong(get(key)));
-        } catch (NumberFormatException exception) {
-            return Duration.ofSeconds(defaultValue);
-        }
     }
 }
