@@ -18,6 +18,7 @@ public class EnvironmentWrapper {
         return get("Environment");
     }
 
+    // Table name: 'csa-users'
     public static String getTableName() {
         return get("TableName");
     }

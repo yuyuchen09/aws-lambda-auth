@@ -9,11 +9,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 /**
  * Handles IO for a Java Lambda function as a custom authorizer for API Gateway.
  *
- * TODO
- * - persistent storage: DynamoDB csa-users
- * - create an account
- * - delete an account
- * - logging, CloudWatch
  * - JWT secret key support
  */
 public class LambdaAuthorizerHandler implements RequestHandler<TokenAuthorizerContext, AuthPolicy> {
