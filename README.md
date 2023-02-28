@@ -20,28 +20,30 @@ User info is stored in DynamoDB
 
 Here is a sample JSON view of a user info.
 
+`
 {
-"user": {
-"S": "UC18G27K8"
-},
-"info": {
-"M": {
-"email": {
-"S": "ychen@ghx.com"
-},
-"name": {
-"S": "ychen"
-},
-"real_name": {
-"S": "Yu Chen"
-} }}}
-
+   "user": {
+     "S": "UC18G27K8"
+   },
+  "info": {
+     "M": {
+        "email": {
+           "S": "ychen@ghx.com"
+        },
+        "name": {
+          "S": "ychen"
+         },
+        "real_name": {
+           "S": "Yu Chen"
+        } 
+     }
+  }
+}
+`
 ## Docs and References ##
 For more details, see public documentation for:
-- API Gateway Custom Authorizers
-- Use API Gateway Lambda authorizers
-  https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+- [Use API Gateway Lambda authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
   [Blog Post](https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/) -- [Developer Guide](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
 - https://jwt.io/
-- Tutorial: Build a CRUD API with Lambda and DynamoDB
-  https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html#http-api-dynamo-db-create-routes
+- [Tutorial: Build a CRUD API with Lambda and DynamoDB](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html#http-api-dynamo-db-create-routes)
+  
