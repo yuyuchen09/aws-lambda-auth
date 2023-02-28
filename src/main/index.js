@@ -1,45 +1,37 @@
-const AWS = require('aws-sdk');
-const dynamo = new AWS.DynamoDB.DocumentClient();
-const { v4: uuidv4 } = require('uuid');
-const {
-	PutCommand,
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import {
 	DeleteCommand,
-} = require('@aws-sdk/lib-dynamodb');
-const http = require('http');
+	DynamoDBDocumentClient,
+	GetCommand,
+	PutCommand,
+	ScanCommand,
+} from '@aws-sdk/lib-dynamodb';
+
+const client = new DynamoDBClient({});
+const dynamo = DynamoDBDocumentClient.from(client);
+// get table name from env variables
+let tableName = 'csa-users';
+tableName = process.env.dynamoDBTableName;
+
+const now = new Intl.DateTimeFormat('en-US').format(Date.now());
 
 /**
- * Node.js 14.x
- * Backend lambda, HelloWorld-lambda-DDB
- * TODO  Have a list of things for enhancements
- * - sanitize password: encrypt SHA-256 password to DDB, sanitize password.
- *
- * Demonstrates a simple HTTP endpoint using API Gateway. You have full
- * access to the request and response payload, including headers and
- * status code.
- *
- * To scan a DynamoDB table, make a GET request with the TableName as a
- * query string parameter. To put, update, or delete an item, make a POST,
- * PUT, or DELETE request respectively, passing in the payload to the
- * DynamoDB API as a JSON body.
+ * ES6 v3 - Node.js v16.x
+ * CSA backend lambda, alias "csa-api-users-lambda", for user account CRUD operations on DynamoDB table 'csa-users',
  */
-exports.handler = async(event, context) => {
-	console.log('Received event:', JSON.stringify(event, null, 2));
-	// TODO get table name from env variables
-	let ddb_tableName = 'csa-users';
-	//ddb_tableName = process.env.dynamoDBTableName;
-
+export const handler = async(event, context) => {
 	let body;
-	let statusCode = '200';
+	let statusCode = 200;
 	const headers = {
 		'Content-Type': 'application/json',
 	};
 
 	try {
-		switch (event.httpMethod) {
+		switch (event.routeKey) {
 			case 'DELETE /user/{id}':
 				await dynamo.send(
 					new DeleteCommand({
-						TableName: ddb_tableName,
+						TableName: tableName,
 						Key: {
 							id: event.pathParameters.id,
 						},
@@ -47,27 +39,42 @@ exports.handler = async(event, context) => {
 				);
 				body = `Deleted item ${event.pathParameters.id}`;
 				break;
-			case 'POST /user':
-				// TODO sanitize password: encrypt SHA-256 password to DDB,
+			case 'GET /user/{id}':
+				body = await dynamo.send(
+					new GetCommand({
+						TableName: tableName,
+						Key: {
+							id: event.pathParameters.id,
+						},
+					}),
+				);
+				body = body.Item;
+				break;
+			case 'GET /user':
+				body = await dynamo.send(
+					new ScanCommand({ TableName: tableName }),
+				);
+				body = body.uses;
+				break;
+			case 'PUT /user':
 				let requestJSON = JSON.parse(event.body);
 				await dynamo.send(
 					new PutCommand({
-						TableName: ddb_tableName,
+						TableName: tableName,
 						Item: {
-							id: requestJSON.id + uuidv4(),
+							id: requestJSON.id,
+							price: requestJSON.price,
 							name: requestJSON.name,
-							email: requestJSON.email,
-							password: requestJSON.password
 						},
 					}),
 				);
 				body = `Put item ${requestJSON.id}`;
 				break;
 			default:
-				throw new Error(`Unsupported method "${event.httpMethod}"`);
+				throw new Error(`Unsupported route: "${event.routeKey}"`);
 		}
 	} catch (err) {
-		statusCode = '400';
+		statusCode = 400;
 		body = err.message;
 	} finally {
 		body = JSON.stringify(body);
