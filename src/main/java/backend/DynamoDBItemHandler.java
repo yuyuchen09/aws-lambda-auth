@@ -33,18 +33,23 @@ public class DynamoDBItemHandler implements RequestHandler<APIGatewayProxyReques
         try {
             switch (httpMethod) {
                 case DELETE:
-                    Item itemToDelete = Item.fromJSON(apiGatewayProxyRequestEvent.getBody());
-                    DeleteItemOutcome outcome = DynamoDBItemUtil.deleteItem(itemToDelete);
+                    String emailToDelete = apiGatewayProxyRequestEvent.getQueryStringParameters().get("email");
+                    DeleteItemOutcome outcome = DynamoDBItemUtil.deleteItem(emailToDelete);
                     responseEvent.withStatusCode(SC_NO_CONTENT).withBody(outcome.getItem().toJSONPretty());
                     break;
                 case GET:
-                    String id = apiGatewayProxyRequestEvent.getPathParameters().get("id");
-                    Item itemRetrieved = DynamoDBItemUtil.retrieveItem(id);
-                    responseEvent.withStatusCode(SC_OK)
-                            .withBody(itemRetrieved.toJSONPretty());
+                    String email = apiGatewayProxyRequestEvent.getQueryStringParameters().get("email");
+                    Item itemRetrieved = DynamoDBItemUtil.retrieveItem(email);
+
+                    if (itemRetrieved != null) {
+                        responseEvent.withStatusCode(SC_OK).withBody(itemRetrieved.toJSONPretty());
+                    } else {
+                        responseEvent.withStatusCode(HttpStatus.SC_NOT_FOUND);
+                    }
+                    break;
                 case POST:
                     Item item = Item.fromJSON(apiGatewayProxyRequestEvent.getBody());
-                    DynamoDBItemUtil.deleteItem(item);
+                    DynamoDBItemUtil.createItem(item);
                     responseEvent.withStatusCode(HttpStatus.SC_CREATED)
                             .withBody(item.toJSONPretty());
                     break;

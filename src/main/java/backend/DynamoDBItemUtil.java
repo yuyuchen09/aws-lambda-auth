@@ -2,6 +2,8 @@ package backend;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -22,6 +24,8 @@ import com.amazonaws.services.dynamodbv2.model.ReturnValue;
  *  - support GET, POST and DELETE
  */
 public class DynamoDBItemUtil {
+    private static final Logger LOGGER = Logger.getLogger(DynamoDBItemUtil.class.getName());
+
     static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
     static DynamoDB dynamoDB = new DynamoDB(client);
     private static final String TABLE_NAME;
@@ -35,37 +39,28 @@ public class DynamoDBItemUtil {
         }
     }
 
-    public static void createItems() {
+    public static void createItem(Item item) {
         Table table = dynamoDB.getTable(TABLE_NAME);
         try {
-            Item item = new Item().withPrimaryKey("Id", 120).withString("Title", "Book 120 Title")
-                    .withString("ISBN", "120-1111111111")
-                    .withStringSet("Authors", new HashSet<String>(Arrays.asList("Author12", "Author22")))
-                    .withNumber("Price", 20).withString("Dimensions", "8.5x11.0x.75").withNumber("PageCount", 500)
-                    .withBoolean("InPublication", false).withString("ProductCategory", "Book");
-            table.putItem(item);
-
-            item = new Item().withPrimaryKey("Id", 121).withString("Title", "Book 121 Title")
-                    .withString("ISBN", "121-1111111111")
-                    .withStringSet("Authors", new HashSet<String>(Arrays.asList("Author21", "Author 22")))
-                    .withNumber("Price", 20).withString("Dimensions", "8.5x11.0x.75").withNumber("PageCount", 500)
-                    .withBoolean("InPublication", true).withString("ProductCategory", "Book");
-            table.putItem(item);
+            Item itemToCreate = new Item().withPrimaryKey("Email", "jdoe@ghx.com")
+                    .withString("FullName", "John Doe");
+            table.putItem(itemToCreate);
         } catch (Exception e) {
             System.err.println("Create items failed.");
             System.err.println(e.getMessage());
         }
     }
 
-    public static Item retrieveItem(String id) {
-        Item item = null;
+    public static Item retrieveItem(String email) {
+        Item item;
         Table table = dynamoDB.getTable(TABLE_NAME);
         try {
-            item = table.getItem("Id", id, "id, name, email", null);
-            System.out.println("Printing item after retrieving it...." + item.toJSONPretty());
+            // Partition/Hash key: Email
+            item = table.getItem("Email", email, "Email, FullName", null);
+            LOGGER.info("Printing item after retrieving it...." + item.toJSONPretty());
             return item;
         } catch (Exception e) {
-            System.err.println("GetItem failed." + e.getMessage());
+            LOGGER.log(Level.SEVERE, "GetItem failed." + e.getMessage());
         }
 
         return null;
@@ -129,15 +124,10 @@ public class DynamoDBItemUtil {
         }
     }
 
-    public static DeleteItemOutcome deleteItem(Item item) {
+    public static DeleteItemOutcome deleteItem(String email) {
         Table table = dynamoDB.getTable(TABLE_NAME);
-        String id = item.getString("id");
-        String name = item.getString("name");
         try {
-            DeleteItemSpec deleteItemSpec = new DeleteItemSpec().withPrimaryKey("id", id)
-                    .withConditionExpression("#name = :val").withNameMap(new NameMap().with("#name", "name"))
-                    .withValueMap(new ValueMap().withString(":val", name)).withReturnValues(ReturnValue.ALL_OLD);
-
+            DeleteItemSpec deleteItemSpec = new DeleteItemSpec().withPrimaryKey("Email", email);
             DeleteItemOutcome outcome = table.deleteItem(deleteItemSpec);
             System.out.println("Printing item that was deleted..." + outcome.getItem().toJSONPretty());
             return outcome;

@@ -2,7 +2,7 @@
 	"body": "{\"test\":\"body\"}",
 	"resource": "/user",
 	"path": "/user",
-	"httpMethod": "POST",
+	"httpMethod": "GET",
 	"queryStringParameters": {
 		"email": "jdoe@ghx.com"
 	},
@@ -51,7 +51,7 @@
 			"user": null
 		},
 		"resourcePath": "/user",
-		"httpMethod": "POST",
+		"httpMethod": "GET",
 		"apiId": "1234567890"
 	}
 }

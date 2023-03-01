@@ -18,7 +18,7 @@ public class DynamoDBItemHandlerTest extends TestCase {
     @Test
     public void testGetEvent() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        InputStream eventStream = this.getClass().getResourceAsStream("apiGatewayProxyRequestEvent_POST.json");
+        InputStream eventStream = this.getClass().getResourceAsStream("apiGatewayProxyRequestEvent_GET.json");
         APIGatewayProxyRequestEvent requestEvent = objectMapper.readValue(eventStream, APIGatewayProxyRequestEvent.class);
         APIGatewayProxyResponseEvent responseEvent;
         DynamoDBItemHandler handler = new DynamoDBItemHandler();
