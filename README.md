@@ -6,6 +6,14 @@ AWS services used,
 - account creation with backend lambda function
 - AWS DynamoDB for persistent storage
 
+## Repo
+https://github.com/yuyuchen09/aws-lambda-auth
+
+## TODOs
+- Doc with an overall Lucidchart diagram
+- AuthPolicy based on principalId
+- JWTUtil, handle token properly
+
 ## Java
 Not available in the Lambda console. Use the AuthPolicy object to generate and serialize IAM policies for your custom authorizer. See javadoc comments for more details.
 
@@ -22,24 +30,19 @@ Here is a sample JSON view of a user info.
 
 `
 {
-   "user": {
-     "S": "UC18G27K8"
-   },
-  "info": {
-     "M": {
-        "email": {
-           "S": "ychen@gmail.com"
-        },
-        "name": {
-          "S": "ychen"
-         },
-        "real_name": {
-           "S": "Yu Chen"
-        } 
-     }
-  }
+{
+"email": {
+"S": "dev@gmail.com"
+},
+"fullName": {
+"S": "dev"
+},
+"password": {
+"S": "$2a$10$NAeW4GtjeQX4jiZeopUl/OqIWOgBctkcmBp/EVPa7BGQ8OwqmsIO6"
+}
 }
 `
+
 ## Docs and References ##
 For more details, see public documentation for:
 - [Use API Gateway Lambda authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
