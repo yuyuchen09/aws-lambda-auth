@@ -34,9 +34,9 @@ public class DynamoDBItemHandlerTest extends TestCase {
     @BeforeAll
     public void setUp() throws Exception {
         List<UserItem> users = new ArrayList<>();
-        users.add(new UserItem().withEmail("dev@gmail.com").withFullName("dev").withPassword(generateSecurePassword("test123")));
-        users.add(new UserItem().withEmail("jdoe@gmail.com").withFullName("John Doe").withPassword(generateSecurePassword("test123")));
-        users.add(new UserItem().withEmail("qa@gmail.com").withFullName("qa").withPassword(generateSecurePassword("test123")));
+        users.add(new UserItem().withEmail("dev@gmail.com").withFullName("dev").withPassword(generatePassword("test123")));
+        users.add(new UserItem().withEmail("jdoe@gmail.com").withFullName("John Doe").withPassword(generatePassword("test123")));
+        users.add(new UserItem().withEmail("qa@gmail.com").withFullName("qa").withPassword(generatePassword("test123")));
 
         DynamoDBItemHandler handler = new DynamoDBItemHandler();
         for (UserItem user : users) {
@@ -100,7 +100,7 @@ public class DynamoDBItemHandlerTest extends TestCase {
         InputStream eventStream = getClass().getClassLoader().getResourceAsStream("request/apiGatewayProxyRequestEvent_POST.json");
         APIGatewayProxyRequestEvent requestEvent = objectMapper.readValue(eventStream, APIGatewayProxyRequestEvent.class);
         Item newItem = Item.fromJSON(requestEvent.getBody());
-        newItem.withString(password.name(), generateSecurePassword(newItem.getString(password.name())));
+        newItem.withString(password.name(), generatePassword(newItem.getString(password.name())));
         requestEvent.setBody(newItem.toJSON());
         APIGatewayProxyResponseEvent responseEvent = handler.handleRequest(requestEvent, null);
         assertEquals(SC_CREATED, (int) responseEvent.getStatusCode());
@@ -110,8 +110,12 @@ public class DynamoDBItemHandlerTest extends TestCase {
         assertEquals(SC_CREATED, (int) responseEvent1.getStatusCode());
     }
 
+    @Test
+    public void testPostEventConflict() {
+        // More tests for cases if item exists...
+    }
 
-    private String generateSecurePassword(String password) {
+    private String generatePassword(String password) {
         return password + randomInt(10000);
     }
 

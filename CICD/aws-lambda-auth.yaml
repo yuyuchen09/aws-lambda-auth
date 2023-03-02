@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: 'AWS lambda auth project with DynamoDB'
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 128
+      Handler: authorizer.LambdaAuthorizerHandler
+      CodeUri: /Users/ychen/workspace/aws-lambda-auth
+      Runtime: java11
+      Architectures:
+        - x86_64

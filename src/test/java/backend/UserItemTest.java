@@ -1,12 +1,11 @@
 package backend;
 
+import org.junit.jupiter.api.Test;
+
 import junit.framework.TestCase;
 
 public class UserItemTest extends TestCase {
 
-    public void testTestEquals() {
-        // more test
-    }
 
     public void testFromJson() {
         String testJson = "{\n" +
@@ -22,7 +21,18 @@ public class UserItemTest extends TestCase {
         assertTrue(devItem.equals(resultItem));
     }
 
+    @Test
+    public void testEquals() {
+        // more test
+    }
+
+    @Test
     public void testToJson() {
-        //...
+        // ...
+    }
+
+    @Test
+    public void testGenerateSecurePassword() {
+        // ...
     }
 }

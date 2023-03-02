@@ -55,7 +55,7 @@ public class DynamoDBItemUtil {
         Table table = dynamoDB.getTable(TABLE_NAME);
         try {
             String password = item.getString(UserItem.Key.password.name());
-            item.withString(UserItem.Key.password.name(), new BCryptPasswordEncoder().encode(password));  // BCrypt encrypted pswd
+            item.withString(UserItem.Key.password.name(), UserItem.generateSecurePassword(password));  // BCrypt encrypted pswd
             PutItemOutcome putItemOutcome = table.putItem(item);
             if (putItemOutcome != null && putItemOutcome.getItem() != null) {
                 LOGGER.log(Level.INFO, "Item created: " + putItemOutcome.getItem().toJSONPretty());
@@ -72,7 +72,7 @@ public class DynamoDBItemUtil {
         Item item;
         Table table = dynamoDB.getTable(TABLE_NAME);
         try {
-            // Partition/Hash key: Email
+            // Partition/Hash key: "email"; No global secondary index createdmvn
             item = table.getItem(UserItem.Key.email.name(), email, "email, fullName", null);
             LOGGER.info("Item after retrieving it...." + item.toJSONPretty());
             return item;

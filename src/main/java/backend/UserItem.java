@@ -1,5 +1,7 @@
 package backend;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.google.gson.Gson;
 import lombok.*;
 
@@ -35,5 +37,9 @@ public class UserItem {
 
     public String toJson() {
         return GSON.toJson(this);
+    }
+
+    public static String generateSecurePassword(String password) {
+        return new BCryptPasswordEncoder().encode(password);
     }
 }
