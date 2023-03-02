@@ -61,7 +61,7 @@ Resources:
           Value: !Sub '${Owner}'
 
 
-  Api:
+  RestApi:
     Type: 'AWS::ApiGateway::RestApi'
     Properties:
       Name: !Join
@@ -79,6 +79,26 @@ Resources:
         - Key: owner
           Value: !Sub '${Owner}'
 
+  Authorizer:
+    Type: 'AWS::ApiGateway::Authorizer'
+    Properties:
+      AuthorizerCredentials: !GetAtt
+        - LambdaInvocationRole
+        - Arn
+      AuthorizerResultTtlInSeconds: '300'
+      AuthorizerUri: !Join
+        - ''
+        - - 'arn:aws:apigateway:'
+          - !Ref 'AWS::Region'
+          - ':lambda:path/2015-03-31/functions/'
+          - !GetAtt
+            - LambdaAuthorizer
+            - Arn
+          - /invocations
+      Type: TOKEN
+      IdentitySource: method.request.header.Auth
+      Name: DefaultAuthorizer
+      RestApiId: !Ref RestApi
 
   LambdaAuthorizerRole:
     Type: 'AWS::IAM::Role'
