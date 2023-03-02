@@ -1,8 +1,24 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: 'AWS lambda auth project with DynamoDB'
+Parameters:
+  Project:
+    Description: Project name
+    Type: String
+    Default: 'aws-lambda-auth'
+  Owner:
+    Description: owner of project
+    Type: String
+    Default: 'ychen'
+  RoleSuffix:
+    Description: The suffix to add to the role
+    Type: String
+    Default: 'Role'
+
 Resources:
-  Function:
+  LambdaAuthorizer:
     Type: AWS::Serverless::Function
+    DependsOn:
+      - LambdaAuthorizer
     Properties:
       Timeout: 300
       MemorySize: 128
@@ -11,3 +27,123 @@ Resources:
       Runtime: java11
       Architectures:
         - x86_64
+      Role: !GetAtt 'InvokerHttpRole.Arn'
+      Environment:
+        Variables:
+          BuildNumber: !Sub '${BuildNumber}'
+      Tags:
+        - Key: project
+          Value: !Sub '${Project}'
+        - Key: owner
+          Value: !Sub '${Owner}'
+
+  LambdaDynamoDBItem:
+    Type: AWS::Serverless::Function
+    DependsOn:
+      - LambdaAuthorizer
+    Properties:
+      Timeout: 300
+      MemorySize: 128
+      Handler: backend.DynamoDBItemHandler
+      CodeUri: /Users/ychen/workspace/aws-lambda-auth
+      Runtime: java11
+      Architectures:
+        - x86_64
+      Role: !GetAtt 'InvokerHttpRole.Arn'
+      Environment:
+        Variables:
+          BuildNumber: !Sub '${BuildNumber}'
+          TableName: !Sub '$TableName}'
+      Tags:
+        - Key: project
+          Value: !Sub '${Project}'
+        - Key: owner
+          Value: !Sub '${Owner}'
+
+
+  Api:
+    Type: 'AWS::ApiGateway::RestApi'
+    Properties:
+      Name: !Join
+        - '-'
+        - - !Ref Project
+          - API
+      Description: !Sub '${Project} api'
+      FailOnWarnings: true
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+      Tags:
+        - Key: project
+          Value: !Sub '${Project}'
+        - Key: owner
+          Value: !Sub '${Owner}'
+
+
+  LambdaAuthorizerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'java-lambda-authorizer-${RoleSuffix}'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: !Sub 'LambdaAuthorizerRole-Lambda-GetParameter'
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'ssm:GetParameter'
+                Resource: '*'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess'
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaMicroserviceExecutionRole'
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaRole'
+      Tags:
+        - Key: project
+          Value: !Sub '${Project}'
+        - Key: owner
+          Value: !Sub '${Owner}'
+
+  InvokerHttpRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: 'java-lambda-DDB-${RoleSuffix}'
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Path: /
+      Policies:
+        - PolicyName: !Sub 'InvokerHttpRole-Lambda-GetParameter'
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'ssm:GetParameter'
+                Resource: '*'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess'
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaMicroserviceExecutionRole'
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaRole'
+      Tags:
+        - Key: project
+          Value: !Sub '${Project}'
+        - Key: owner
+          Value: !Sub '${Owner}'

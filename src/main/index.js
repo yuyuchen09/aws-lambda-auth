@@ -17,7 +17,7 @@ const now = new Intl.DateTimeFormat('en-US').format(Date.now());
 
 /**
  * ES6 v3 - Node.js v16.x
- * CSA backend lambda, alias "csa-api-users-lambda", for user account CRUD operations on DynamoDB table 'csa-users',
+ * backend lambda, for user account CRUD operations on DynamoDB table 'csa-users'.
  */
 export const handler = async(event, context) => {
 	let body;

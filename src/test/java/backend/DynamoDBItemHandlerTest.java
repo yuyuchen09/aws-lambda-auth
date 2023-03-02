@@ -51,7 +51,7 @@ public class DynamoDBItemHandlerTest extends TestCase {
     @AfterAll
     public void tearDown() throws Exception {
         super.tearDown();
-        // if need to delete any...
+        // ...
     }
 
     @Test
