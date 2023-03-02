@@ -11,10 +11,6 @@
         <aws.sdk.version>1.2.1</aws.sdk.version>
         <aws.sdk.iam.version>1.12.198</aws.sdk.iam.version>
         <aws.lambda.events.version>3.11.0</aws.lambda.events.version>
-        <springSecurityVersion>5.0.0.RELEASE</springSecurityVersion>
-        <gson.version>2.2.4</gson.version>
-        <lombok.version>1.18.10</lombok.version>
-        <aws.java.sdk-dynamodb.version>1.12.198</aws.java.sdk-dynamodb.version>
     </properties>
     <build>
         <plugins>
@@ -34,9 +30,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <argLine>-Dfile.encoding=UTF-8 -Xmx2048m -Djava.awt.headless=true -noverify --add-opens=java.xml/jdk.xml.internal=ALL-UNNAMED
-                        -Djdk.attach.allowAttachSelf=true --illegal-access=permit
-                    </argLine>
+                    <argLine>-Dfile.encoding=UTF-8 -Xmx2048m -Djava.awt.headless=true -noverify --add-opens=java.xml/jdk.xml.internal=ALL-UNNAMED -Djdk.attach.allowAttachSelf=true --illegal-access=permit</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -84,28 +78,13 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-dynamodb</artifactId>
-            <version>${aws.java.sdk-dynamodb.version}</version>
+            <version>1.12.198</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>RELEASE</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${springSecurityVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
 

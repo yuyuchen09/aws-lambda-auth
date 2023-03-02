@@ -28,7 +28,7 @@ Here is a sample JSON view of a user info.
   "info": {
      "M": {
         "email": {
-           "S": "ychen@gmail.com"
+           "S": "ychen@ghx.com"
         },
         "name": {
           "S": "ychen"
