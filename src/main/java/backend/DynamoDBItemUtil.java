@@ -3,8 +3,6 @@ package backend;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DeleteItemOutcome;
