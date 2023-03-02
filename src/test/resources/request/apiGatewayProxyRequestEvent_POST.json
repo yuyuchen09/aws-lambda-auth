@@ -1,10 +1,9 @@
 {
-	"body": "{\"test\":\"body\"}",
+	"body": "{\n  \"email\": \"dev@gmail.com\",\n  \"fullName\": \"dev\",\n  \"password\": \"dev123\"\n}",
 	"resource": "/user",
 	"path": "/user",
 	"httpMethod": "POST",
 	"queryStringParameters": {
-		"email": "jdoe@ghx.com"
 	},
 	"pathParameters": {
 		"proxy": "/user"
