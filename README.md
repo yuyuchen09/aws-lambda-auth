@@ -37,8 +37,8 @@ Here is a sample JSON view of a user item stored in DDB.
 }
 `
 ## Secure Password
-- In transit, Lambda API is only supported on HTTPS according to AWS Regions and Endpoints documentation.
-For Lambda Proxy integration, all requests are proxied "as is" to the endpoint Lambda.
+- In transit, Lambda API is only supported on HTTPS according to AWS Regions and Endpoints documentation. All of the APIs created with Amazon API Gateway expose HTTPS endpoints only. Amazon API Gateway does not support unencrypted (HTTP) endpoints.
+  For Lambda Proxy integration, all requests are proxied "as is" to the endpoint Lambda. 
 - At rest, All user data stored in Amazon DynamoDB is fully encrypted at rest by default using AWS KMS.
 See in test event, header "X-Forwarded-Port": "443"
 - Spring security for password encryption, <a href= https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/api/>BCryptPasswordEncoder</a>
