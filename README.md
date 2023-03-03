@@ -7,13 +7,18 @@ https://github.com/yuyuchen09/aws-lambda-auth
 
 ![AWS REST API with Lambda Authorizer.png](AWS%20REST%20API%20with%20Lambda%20Authorizer.png)
 
-## Build 
-Java 11 & Maven 3.8
-see POM.xml for details
-$ mvn clean install -DskipTest
-$ mvn test
+## JDK and Build Tools
+**Java 11 & Maven 3.8**
 
-Use the AuthPolicy object to generate IAM policies for your custom authorizer. 
+see POM.xml for details.
+
+`$ mvn clean install -DskipTest
+`
+
+Run tests,
+
+`$ mvn test
+`
 
 ## AWS RESTAPI Gateway 
 Amazon API Gateway can be utilized as the secure endpoint. Used to send or receive dynamic content.
