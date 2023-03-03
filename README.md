@@ -46,18 +46,18 @@ See in test event, header "X-Forwarded-Port": "443"
 - Spring security for password encryption, <a href= https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/api/>BCryptPasswordEncoder</a>
 
 ## TODOs
-- Doc with an overall LucidChart diagram
+~~- Doc with an overall LucidChart diagram~~
 - ~~CRUD support: POST, GET, and DELETE~~
 - ~~Secure password: BCrypt encrypted pswd~~
 - ~~UserItem VO: to and from JSON object~~
 - ~~CICD CloudFormation draft~~
 - ~~Java to Kotlin conversion~~
 - ~~Testing~~:
-  1. Unit tests
-  2. Local docker lambda end-to-end testing: Using AWT Toolkit
-  3. Test from Lambda console
-  4. Test from API Gateway
-  5. Postman collection
+  ~~1. Unit tests~~
+  ~~2. Local docker lambda end-to-end testing: Using AWT Toolkit~~
+  ~~3. Test from Lambda console~~
+  ~~4. Test from API Gateway~~
+  5. Postman collection: 
 - AuthPolicy based on principalId
 - JWTUtil, handle token properly
 
@@ -66,5 +66,4 @@ For more details, see public documentation for:
 - [Use API Gateway Lambda authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
   [Blog Post](https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/) -- [Developer Guide](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
 - https://jwt.io/
-- [Tutorial: Build a CRUD API with Lambda and DynamoDB](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html#http-api-dynamo-db-create-routes)
   
