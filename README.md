@@ -46,20 +46,26 @@ See in test event, header "X-Forwarded-Port": "443"
 - Spring security for password encryption, <a href= https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/api/>BCryptPasswordEncoder</a>
 
 ## TODOs
-~~- Doc with an overall LucidChart diagram~~
-- ~~CRUD support: POST, GET, and DELETE~~
-- ~~Secure password: BCrypt encrypted pswd~~
-- ~~UserItem VO: to and from JSON object~~
-- ~~CICD CloudFormation draft~~
-- ~~Java to Kotlin conversion~~
-- ~~Testing~~:
-  ~~1. Unit tests~~
-  ~~2. Local docker lambda end-to-end testing: Using AWT Toolkit~~
-  ~~3. Test from Lambda console~~
-  ~~4. Test from API Gateway~~
-  5. Postman collection: 
-- AuthPolicy based on principalId
-- JWTUtil, handle token properly
+* ~~Doc with an overall LucidChart diagram~~
+* ~~DynamoDB CRUD operations support: POST, GET, and DELETE~~
+  * DDB table setup: partitiion/hash key: email
+  * Global second index on field 'fullName': search by _fullName=dev_ 
+* ~~Setup the pipeline:~~
+  * Connect with Lambda custom authorizer
+  * Proxy request to backend lambda DynamoDB CRUD function
+  * new Stage 'demo'
+* ~~Secure password: BCrypt encrypted pswd~~
+* ~~UserItem VO: to and from JSON object~~
+* ~~CICD CloudFormation draft only~~
+* ~~Java to Kotlin conversion~~
+* ~~Testings~~:
+  * ~~Unit tests~~
+  * ~~Local docker lambda end-to-end testing: Using AWT Toolkit~~
+  * ~~Test from Lambda console~~
+  * ~~Test from API Gateway~~
+  * Postman collection: ??
+* AuthPolicy based on principalId
+* JWTUtil, handle token properly
 
 ## Docs and Refs ##
 For more details, see public documentation for:
