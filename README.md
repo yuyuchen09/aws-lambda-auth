@@ -5,7 +5,7 @@ https://github.com/yuyuchen09/aws-lambda-auth
 
 ## System Elements
 
-![AWS API Auth with Lambda Authorizer.png](AWS%20API%20Auth%20with%20Lambda%20Authorizer.png)
+![AWS REST API with Lambda Authorizer.png](AWS%20REST%20API%20with%20Lambda%20Authorizer.png)
 
 ## Build 
 Java 11 & Maven 3.8
@@ -43,11 +43,11 @@ Here is a sample JSON view of a user item stored in DDB.
 See in test event, header "X-Forwarded-Port": "443"
 - Spring security for password encryption, <a href= https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/api/>BCryptPasswordEncoder</a>
 
-## TODOs
+## Tasks
 1. [x] ~~Doc with an overall LucidChart diagram~~
 2. [x] ~~DynamoDB CRUD operations support: POST, GET, and DELETE~~
-   * DDB table setup: partitiion/hash key: email
-   * Global second index on field 'fullName': search by _fullName=dev_
+   * DDB table setup: partition/hash key: 'email'
+   * Global second index on field 'fullName': searchable by _fullName=dev_
 3. [x] ~~Setup the pipeline:~~
    * Connect with Lambda custom authorizer
    * Proxy request to endpoint lambda DynamoDB CRUD function
@@ -61,7 +61,7 @@ See in test event, header "X-Forwarded-Port": "443"
    * ~~Local docker lambda end-to-end testing: with AWT Toolkit~~
    * ~~Test from AWS Lambda console~~
    * ~~Test from API Gateway test interface~~
-   * Postman collection: ??
+   * Postman collection: TODO??
 9. [ ] AuthPolicy based on principalId
 10. [ ] JWTUtil, handle token properly
 
