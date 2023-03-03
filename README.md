@@ -50,7 +50,7 @@ See in test event, header "X-Forwarded-Port": "443"
    * Global second index on field 'fullName': search by _fullName=dev_
 3. [x] ~~Setup the pipeline:~~
    * Connect with Lambda custom authorizer
-   * Proxy request to backend lambda DynamoDB CRUD function
+   * Proxy request to endpoint lambda DynamoDB CRUD function
    * new Stage 'demo'
 4. [x] ~~Secure password: BCrypt encrypted pswd~~
 5. [x] ~~UserItem VO: to and from JSON object~~

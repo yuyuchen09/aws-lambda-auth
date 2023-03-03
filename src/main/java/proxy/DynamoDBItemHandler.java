@@ -23,7 +23,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
 /**
- * Handler for a backend Java Lambda microservice for DynamoDB CRUD operations.
+ * Handler for a endpoint Lambda microservice for DynamoDB CRUD operations.
  * - HEAD, OPTION, PATCH, PUT, or batch operation unsupported
  */
 public class DynamoDBItemHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
