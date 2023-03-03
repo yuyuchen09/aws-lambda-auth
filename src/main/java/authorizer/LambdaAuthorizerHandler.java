@@ -1,7 +1,7 @@
 package authorizer;
 
-import io.AuthPolicy;
-import io.TokenAuthorizerContext;
+import api.AuthPolicy;
+import api.TokenAuthorizerContext;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;

@@ -1,28 +1,26 @@
 # REST API for login and account creation
 
-AWS services used,
-- AWS API Gateway for REST API
-- authentication with lambda Custom Authorizer
-- account creation with backend lambda function
-- AWS DynamoDB for persistent storage
-
 ## Repo
 https://github.com/yuyuchen09/aws-lambda-auth
 
 ## System Elements
 
-![aws_api_lambda_auth.png](aws_api_lambda_auth.png) 
+![AWS API Auth with Lambda Authorizer.png](AWS%20API%20Auth%20with%20Lambda%20Authorizer.png)
 
-## Java
-Not available in the Lambda console. Use the AuthPolicy object to generate and serialize IAM policies for your custom authorizer. See javadoc comments for more details.
+## Build 
+Java 11 & Maven 3.8
+see POM.xml for details
+$ mvn clean install -DskipTest
+$ mvn test
+
+Use the AuthPolicy object to generate IAM policies for your custom authorizer. 
 
 ## Lambda Custom Authorizer
 
 ## DynamoDB for persistent storage
-User info is persistent into DynamoDB, table 'csa-users'.
+User account info is persistent into DynamoDB (DDB), table 'csa-users'.
 
-
-Here is a sample JSON view of a user info.
+Here is a sample JSON view of a user item stored in DDB.
 
 `
 {

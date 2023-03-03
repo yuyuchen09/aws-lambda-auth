@@ -1,6 +1,6 @@
-package backend;
+package proxy;
 
-import static backend.UserItem.Key.password;
+import static proxy.UserItem.Key.password;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;

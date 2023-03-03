@@ -1,6 +1,6 @@
-package backend;
+package proxy;
 
-import static backend.UserItem.Key.email;
+import static proxy.UserItem.Key.email;
 import static org.apache.http.HttpStatus.SC_CONFLICT;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
