@@ -1,0 +1,13 @@
+{
+	"name": "aws-lambda-auth",
+	"version": "1.0.0",
+	"type": "module",
+	"dependencies": {
+		"@aws-sdk/lib-dynamodb": "^3.279.0",
+		"aws-sdk": "^2.1324.0",
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"@aws-sdk/client-dynamodb": "^3.279.0"
+	}
+}
