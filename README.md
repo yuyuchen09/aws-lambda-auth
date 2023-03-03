@@ -15,7 +15,18 @@ $ mvn test
 
 Use the AuthPolicy object to generate IAM policies for your custom authorizer. 
 
+## AWS RESTAPI Gateway 
+Amazon API Gateway can be utilized as the secure endpoint. Used to send or receive dynamic content.
+
 ## Lambda Custom Authorizer
+handler: authorizer.LambdaAuthorizerHandler
+
+Java Lambda function as a custom authorizer for API Gateway. It takes a request parameter or token and returns principalId and authPolicy.
+
+## Endpoint lambda for DynamoDB CRUD operations
+Invoke URL: https://bmj9e26en4.execute-api.us-west-2.amazonaws.com/demo/user
+handler: proxy.DynamoDBItemHandler
+
 
 ## DynamoDB for persistent storage
 User account info is persistent into DynamoDB (DDB), table 'csa-users'.
@@ -37,7 +48,7 @@ Here is a sample JSON view of a user item stored in DDB.
 }
 `
 ## Secure Password
-- In transit, Lambda API is only supported on HTTPS according to AWS Regions and Endpoints documentation. All of the APIs created with Amazon API Gateway expose HTTPS endpoints only. Amazon API Gateway does not support unencrypted (HTTP) endpoints.
+- In transit, Lambda API is only supported on **HTTPS** according to AWS Regions and Endpoints documentation. All of the APIs created with Amazon API Gateway expose HTTPS endpoints only. Amazon API Gateway does not support unencrypted (HTTP) endpoints.
   For Lambda Proxy integration, all requests are proxied "as is" to the endpoint Lambda. 
 - At rest, All user data stored in Amazon DynamoDB is fully encrypted at rest by default using AWS KMS.
 See in test event, header "X-Forwarded-Port": "443"
