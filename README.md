@@ -5,7 +5,7 @@ https://github.com/yuyuchen09/aws-lambda-auth
 
 ## System Elements
 
-![AWS REST API with Lambda Authorizer.jpeg](AWS%20REST%20API%20with%20Lambda%20Authorizer.jpeg)
+![AWS REST API with Lambda Authorizer.png](AWS%20REST%20API%20with%20Lambda%20Authorizer.png)
 
 ## JDK and Build Tools
 **Java 11 & Maven 3.8**
@@ -17,7 +17,7 @@ see POM.xml for details.
 
 Run tests,
 
-`$ mvn test
+`$ mvn tests
 `
 
 ## AWS RESTAPI Gateway 
