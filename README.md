@@ -60,28 +60,26 @@ See in test event, header "X-Forwarded-Port": "443"
 - Spring security for password encryption, <a href= https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/api/>BCryptPasswordEncoder</a>
 
 ## Tasks
-1. [x] ~~Doc with an overall LucidChart diagram~~
-2. [x] ~~DynamoDB CRUD operations support: POST, GET, and DELETE~~
+1. **[x]** ~~Doc with an overall LucidChart diagram~~
+2. **[x]** ~~DynamoDB CRUD operations support: POST, GET, and DELETE~~
    * DDB table setup: partition/hash key: 'email'
    * Global second index on field 'fullName': searchable by _fullName=dev_
-3. [x] ~~Setup the pipeline:~~
+3. **[x]** ~~Setup the pipeline:~~
    * Connect with Lambda custom authorizer
    * Proxy request to endpoint lambda DynamoDB CRUD function
    * new Stage 'demo'
-4. [x] ~~Secure password: BCrypt encrypted pswd~~
-5. [x] ~~UserItem VO: to and from JSON object~~
-6. [x] ~~CICD CloudFormation draft only~~
-7. [x] ~~Java to Kotlin conversion~~
-8. [x] ~~Testings~~:
+4. **[x]** ~~Secure password: BCrypt encrypted pswd~~
+5. **[x]** ~~UserItem VO: to and from JSON object~~
+6. **[x]** ~~CICD CloudFormation draft only~~
+7. **[x]** ~~Java to Kotlin conversion~~
+8. **[x]** ~~Testings~~:
    * ~~Unit tests~~
    * ~~Local docker lambda end-to-end testing: with AWT Toolkit~~
    * ~~Test from AWS Lambda console~~
    * ~~Test from API Gateway test interface~~
    * Postman collection: TODO??
-9. [ ] AuthPolicy based on principalId
-10. [ ] JWTUtil, handle token properly
-11. [ ] AWSXray support for tracing and dubbing
-12. [ ] Split endpoint handler to command specific handlers.
+9. **[ ]** AuthPolicy based on principalId
+10. **[ ]** Split endpoint handler to command specific handlers.
 
 ## Docs and Refs ##
 For more details, see public documentation for:
