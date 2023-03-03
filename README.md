@@ -80,6 +80,8 @@ See in test event, header "X-Forwarded-Port": "443"
    * Postman collection: TODO??
 9. [ ] AuthPolicy based on principalId
 10. [ ] JWTUtil, handle token properly
+11. [ ] AWSXray support for tracing and dubbing
+12. [ ] Split endpoint handler to command specific handlers.
 
 ## Docs and Refs ##
 For more details, see public documentation for:
