@@ -1,0 +1,5 @@
+{
+	"type": "TOKEN",
+	"authorizationToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZXYiLCJuYW1lIjoiZGV2IiwiaWF0IjoxNTE2MjM5MDIyfQ.d4lPpd17_sWHLtzyJok5nOrqpH4n8r-oatXrLBdPHTg",
+	"methodArn": "arn:aws:execute-api:us-west-2:050190852521:bmj9e26en4/demo/GET/user"
+}

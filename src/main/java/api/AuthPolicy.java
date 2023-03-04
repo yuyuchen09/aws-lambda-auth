@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 /**
  * AuthPolicy receives a set of allowed and denied methods and generates a valid
  * AWS policy for the API Gateway authorizer. The constructor receives the calling
@@ -267,4 +269,8 @@ public class AuthPolicy {
 
     }
 
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

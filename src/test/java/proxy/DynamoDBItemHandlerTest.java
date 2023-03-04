@@ -43,7 +43,7 @@ public class DynamoDBItemHandlerTest extends TestCase {
             APIGatewayProxyRequestEvent requestEvent = new APIGatewayProxyRequestEvent();
             requestEvent.setHttpMethod(HttpMethod.POST.name());
             requestEvent.setBody(user.toJson());
-            APIGatewayProxyResponseEvent deleteResponseEvent = handler.handleRequest(requestEvent, null);
+            handler.handleRequest(requestEvent, null);
         }
     }
 
@@ -57,14 +57,14 @@ public class DynamoDBItemHandlerTest extends TestCase {
     @Test
     public void testGetEvent() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        InputStream eventStream = getClass().getClassLoader().getResourceAsStream("request/apiGatewayProxyRequestEvent_GET.json");
+        InputStream eventStream = getClass().getClassLoader().getResourceAsStream("request/proxy/apiGatewayProxyRequestEvent_GET.json");
         APIGatewayProxyRequestEvent requestEvent = objectMapper.readValue(eventStream, APIGatewayProxyRequestEvent.class);
         DynamoDBItemHandler handler = new DynamoDBItemHandler();
         APIGatewayProxyResponseEvent responseEvent = handler.handleRequest(requestEvent, null);
         // assertions
         assertEquals(SC_OK, (int) responseEvent.getStatusCode());
         UserItem resultItem = UserItem.fromJson(responseEvent.getBody());
-        String expectedBody = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("expected/response_GET.json"));
+        String expectedBody = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("expected/proxy/response_GET.json"));
         UserItem expectedItem = UserItem.fromJson(expectedBody);
         assertTrue(resultItem.equals(expectedItem));
     }
@@ -97,7 +97,7 @@ public class DynamoDBItemHandlerTest extends TestCase {
 
         // create, 201
         ObjectMapper objectMapper = new ObjectMapper();
-        InputStream eventStream = getClass().getClassLoader().getResourceAsStream("request/apiGatewayProxyRequestEvent_POST.json");
+        InputStream eventStream = getClass().getClassLoader().getResourceAsStream("request/proxy/apiGatewayProxyRequestEvent_POST.json");
         APIGatewayProxyRequestEvent requestEvent = objectMapper.readValue(eventStream, APIGatewayProxyRequestEvent.class);
         Item newItem = Item.fromJSON(requestEvent.getBody());
         newItem.withString(password.name(), generatePassword(newItem.getString(password.name())));

@@ -16,6 +16,11 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 
+import proxy.EnvironmentWrapper;
+
+/**
+ * A SON Web Token (JWT) token-based Lambda authorizer (also called a TOKEN authorizer) receives the caller's identity in a bearer token.
+ */
 public class JWTUtil {
 
     static ConfigurableJWTProcessor jwtProcessor = new DefaultJWTProcessor();
@@ -24,7 +29,7 @@ public class JWTUtil {
         try {
             JWKSource keySource = null;
             keySource = new RemoteJWKSet(
-                    new URL("https://cognito-idp." + System.getenv("AWS_REGION") + ".amazonaws.com/" + System.getenv("USER_POOL_ID") + "/.well-known/jwks.json"));
+                    new URL("https://cognito-idp." + EnvironmentWrapper.getRegion() + ".amazonaws.com/" + EnvironmentWrapper.getUserPoolId() + "/.well-known/jwks.json"));
             JWSAlgorithm expectedJWSAlg = JWSAlgorithm.RS256;
             JWSKeySelector keySelector = new JWSVerificationKeySelector(expectedJWSAlg, keySource);
             jwtProcessor.setJWSKeySelector(keySelector);

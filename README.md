@@ -17,20 +17,21 @@ see POM.xml for details.
 
 Run tests,
 
-`$ mvn tests
+`$ mvn test
 `
 
 ## AWS RESTAPI Gateway 
 Amazon API Gateway can be utilized as the secure endpoint. Used to send or receive dynamic content.
 
 ## Lambda Custom Authorizer
-handler: authorizer.LambdaAuthorizerHandler
+**handler**: authorizer.LambdaAuthorizerHandler
 
 Java Lambda function as a custom authorizer for API Gateway. It takes a request parameter or token and returns principalId and authPolicy.
 
 ## Endpoint lambda for DynamoDB CRUD operations
 Invoke URL: https://bmj9e26en4.execute-api.us-west-2.amazonaws.com/demo/user
-handler: proxy.DynamoDBItemHandler
+
+**handler**: proxy.DynamoDBItemHandler
 
 
 ## DynamoDB for persistent storage
@@ -75,11 +76,11 @@ See in test event, header "X-Forwarded-Port": "443"
 8. **[x]** ~~Testings~~:
    * ~~Unit tests~~
    * ~~Local docker lambda end-to-end testing: with AWT Toolkit~~
-   * ~~Test from AWS Lambda console~~
+   * ~~Test from AWS Lambda console~~: local docker env
    * ~~Test from API Gateway test interface~~
-   * Postman collection: TODO??
-9. **[ ]** AuthPolicy based on principalId
-10. **[ ]** Split endpoint handler to command specific handlers.
+   * Postman collection: optional
+9. **[x]** AuthPolicy based on principalId
+10. **[ ]** Split endpoint lambda handler to DDB command specific handlers.
 
 ## Docs and Refs ##
 For more details, see public documentation for:
