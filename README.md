@@ -20,6 +20,8 @@ Run tests,
 `$ mvn test
 `
 
+Note: You would need to have the AWS infrastructure illustrated in the System Elements diagram to run this REST APIs with lambda microservices. 
+
 ## AWS RESTAPI Gateway 
 Amazon API Gateway can be utilized as the secure endpoint. Used to send or receive dynamic content.
 
