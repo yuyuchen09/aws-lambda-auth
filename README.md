@@ -12,7 +12,7 @@ https://github.com/yuyuchen09/aws-lambda-auth
 
 see POM.xml for details.
 
-`$ mvn clean install -DskipTest
+`$ mvn clean install -DskipTests
 `
 
 Run tests,
