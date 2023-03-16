@@ -1,5 +1,12 @@
 package api;
 
+import static api.AuthPolicy.IAMPolicyConstants.Action;
+import static api.AuthPolicy.IAMPolicyConstants.Condition;
+import static api.AuthPolicy.IAMPolicyConstants.Effect;
+import static api.AuthPolicy.IAMPolicyConstants.Resource;
+import static api.AuthPolicy.IAMPolicyConstants.Version;
+import static api.AuthPolicy.IAMPolicyConstants.Statement;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,18 +23,22 @@ import com.google.gson.Gson;
  * stage that calls should be allowed/denied for. For example
  *
  * new AuthPolicy(principalId, AuthPolicy.PolicyDocument.getDenyAllPolicy(region, awsAccountId, restApiId, stage));
+ *
+ * TODO just use Package com.amazonaws.auth.policy
+ * The following code creates a policy to allow a specific AWS account to send and receive messages using one of your Amazon SQS queues:
+ *
+ *     Policy policy = new Policy("MyQueuePolicy");
+ *     policy.withStatements(new Statement(Effect.Allow)
+ *            .withPrincipals(new Principal("123456789012"))
+ *            .withActions(SQSActions.SendMessage, SQSActions.ReceiveMessage)
+ *            .withResources(new SQSQueueResource("987654321000", "queue2")));
  */
 public class AuthPolicy {
 
     // IAM Policy Constants
-    public static final String VERSION = "Version";
-    public static final String STATEMENT = "Statement";
-    public static final String EFFECT = "Effect";
-    public static final String ACTION = "Action";
-    public static final String NOT_ACTION = "NotAction";
-    public static final String RESOURCE = "Resource";
-    public static final String NOT_RESOURCE = "NotResource";
-    public static final String CONDITION = "Condition";
+    public enum IAMPolicyConstants {
+        Version, Statement, Effect, Action, NotAction, Resource, NotResource, Condition
+    }
 
     String principalId;
     transient AuthPolicy.PolicyDocument policyDocumentObject;
@@ -58,19 +69,19 @@ public class AuthPolicy {
      */
     public Map<String, Object> getPolicyDocument() {
         Map<String, Object> serializablePolicy = new HashMap<>();
-        serializablePolicy.put(VERSION, policyDocumentObject.Version);
+        serializablePolicy.put(Version.name(), policyDocumentObject.Version);
         Statement[] statements = policyDocumentObject.getStatement();
         Map<String, Object>[] serializableStatementArray = new Map[statements.length];
         for (int i = 0; i < statements.length; i++) {
             Map<String, Object> serializableStatement = new HashMap<>();
             AuthPolicy.Statement statement = statements[i];
-            serializableStatement.put(EFFECT, statement.Effect);
-            serializableStatement.put(ACTION, statement.Action);
-            serializableStatement.put(RESOURCE, statement.getResource());
-            serializableStatement.put(CONDITION, statement.getCondition());
+            serializableStatement.put(Effect.name(), statement.Effect);
+            serializableStatement.put(Action.name(), statement.Action);
+            serializableStatement.put(Resource.name(), statement.getResource());
+            serializableStatement.put(Condition.name(), statement.getCondition());
             serializableStatementArray[i] = serializableStatement;
         }
-        serializablePolicy.put(STATEMENT, serializableStatementArray);
+        serializablePolicy.put(Statement.name(), serializableStatementArray);
         return serializablePolicy;
     }
 
@@ -118,8 +129,8 @@ public class AuthPolicy {
             this.awsAccountId = awsAccountId;
             this.restApiId = restApiId;
             this.stage = stage;
-            allowStatement = Statement.getEmptyInvokeStatement("Allow");
-            denyStatement = Statement.getEmptyInvokeStatement("Deny");
+            allowStatement = AuthPolicy.Statement.getEmptyInvokeStatement("Allow");
+            denyStatement = AuthPolicy.Statement.getEmptyInvokeStatement("Deny");
             this.statements = new ArrayList<>();
             statements.add(allowStatement);
             statements.add(denyStatement);

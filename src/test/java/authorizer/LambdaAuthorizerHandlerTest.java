@@ -1,9 +1,9 @@
 package authorizer;
 
-import static api.AuthPolicy.ACTION;
-import static api.AuthPolicy.EFFECT;
-import static api.AuthPolicy.STATEMENT;
-import static api.AuthPolicy.VERSION;
+import static api.AuthPolicy.IAMPolicyConstants.Action;
+import static api.AuthPolicy.IAMPolicyConstants.Effect;
+import static api.AuthPolicy.IAMPolicyConstants.Statement;
+import static api.AuthPolicy.IAMPolicyConstants.Version;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,10 +29,10 @@ public class LambdaAuthorizerHandlerTest extends TestCase {
         AuthPolicy expectedAuthPolicy = new AuthPolicy("dev",
                 AuthPolicy.PolicyDocument.getAllowAllPolicy(EnvironmentWrapper.DEFAULT_REGION, "#######", "xxxxx", "demo"));
         assertEquals("dev", authPolicy.getPrincipalId());
-        assertEquals("2012-10-17", authPolicy.getPolicyDocument().get(VERSION));
-        Map<String, Object>[] policies = (Map<String, Object>[]) authPolicy.getPolicyDocument().get(STATEMENT);
-        assertTrue(policies[0].get(ACTION).equals("execute-api:Invoke"));
-        assertTrue(policies[0].get(EFFECT).equals("Allow"));
+        assertEquals("2012-10-17", authPolicy.getPolicyDocument().get(Version.name()));
+        Map<String, Object>[] policies = (Map<String, Object>[]) authPolicy.getPolicyDocument().get(Statement.name());
+        assertTrue(policies[0].get(Action.name()).equals("execute-api:Invoke"));
+        assertTrue(policies[0].get(Effect.name()).equals("Allow"));
     }
 
     public void testHandleRequestDeny() throws IOException {

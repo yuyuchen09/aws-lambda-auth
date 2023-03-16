@@ -5,7 +5,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.google.gson.Gson;
 import lombok.*;
 
-@Data
+/**
+ * A value object that represents an user item.
+ * - equality
+ * - immutability
+ */
 @With
 @ToString
 @NoArgsConstructor
