@@ -89,4 +89,12 @@ For more details, see public documentation for:
 - [Use API Gateway Lambda authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
   [Blog Post](https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/) -- [Developer Guide](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
 - https://jwt.io/
+
+- Verify JSON web token
+   
+  https://cognito-idp.us-west-2.amazonaws.com/us-west-2_AjUDJ7k89/.well-known/jwks.json
+- Generate JWT
+  
+  https://cognito-idp.us-west-2.amazonaws.com/us-west-2_AjUDJ7k89/.well-known/jwks.json
+  
   

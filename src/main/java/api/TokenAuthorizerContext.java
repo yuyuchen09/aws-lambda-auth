@@ -10,7 +10,15 @@
 package api;
 
 /**
- * Object representation of input to an implementation of an API Gateway custom authorizer of type TOKEN
+ * Object representation of input to an implementation of an API Gateway custom authorizer of type TOKEN. For example,
+ * {
+ *     "type":"TOKEN",
+ *     "authorizationToken":"{caller-supplied-token}",
+ *     "methodArn":"arn:aws:execute-api:{regionId}:{accountId}:{apiId}/{stage}/{httpVerb}/[{resource}/[{child-resources}]]"
+ * }
+ *
+ * TODO user aws SDK APIs
+ * https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-lambda-authorizer-input.html
  */
 public class TokenAuthorizerContext {
 

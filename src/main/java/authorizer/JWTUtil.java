@@ -19,7 +19,11 @@ import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 import proxy.EnvironmentWrapper;
 
 /**
- * A SON Web Token (JWT) token-based Lambda authorizer (also called a TOKEN authorizer) receives the caller's identity in a bearer token.
+ * A JSON Web Token (JWT) token-based Lambda authorizer (also called a TOKEN authorizer) receives the caller's identity in a bearer token.
+ * Verify JSON web token
+ * - https://cognito-idp.us-west-2.amazonaws.com/us-west-2_AjUDJ7k89/.well-known/jwks.json
+ * Generate JWT token,
+ * - Go to Cognito user pool | App client | View Hosted UI to get accessToken
  */
 public class JWTUtil {
 
@@ -38,12 +42,12 @@ public class JWTUtil {
         }
     }
 
-    public static String getSub(String token) throws Exception {
+    public static String getData(String token, String dataKey) throws Exception {
         SecurityContext securityContext = null;
         JWTClaimsSet claimsSet;
         try {
             claimsSet = jwtProcessor.process(token, securityContext);
-            return claimsSet.getStringClaim("sub");
+            return claimsSet.getStringClaim(dataKey);
         } catch (JOSEException | ParseException joseException) {
             //logging
             throw joseException;

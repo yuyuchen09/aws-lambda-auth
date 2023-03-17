@@ -8,7 +8,7 @@ import com.amazonaws.util.StringUtils;
 public class EnvironmentWrapper {
     public static final String DEFAULT_REGION = "us-west-2";
     public static final String DEFAULT_TABLE_NAME = "csa-users";
-    public static final String DEFAULT_USER_POOL_ID = "csa-api-auth";
+    public static final String DEFAULT_USER_POOL_ID = "us-west-2_AjUDJ7k89";
 
     public static String get(String key) {
         String property = System.getProperty(key);
