@@ -65,6 +65,7 @@ public class LambdaAuthorizerHandler implements RequestHandler<TokenAuthorizerCo
         switch (userName) {
             case "dev":
             case "ychen":
+            case "admin":
                 authPolicy = new AuthPolicy(principalId, AuthPolicy.PolicyDocument.getAllowAllPolicy(region, awsAccountId, restApiId, stage));
                 break;
             case "qa":

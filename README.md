@@ -80,7 +80,7 @@ See in test event, header "X-Forwarded-Port": "443"
    * ~~Local docker lambda end-to-end testing: with AWT Toolkit~~
    * ~~Test from AWS Lambda console~~: local docker env
    * ~~Test from API Gateway test interface~~
-   * Postman collection: optional
+   * ~~Postman collection: optional~~
 9. **[x]** AuthPolicy based on principalId
 10. **[ ]** Split endpoint lambda handler to DDB command specific handlers.
 
