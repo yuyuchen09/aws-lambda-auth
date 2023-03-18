@@ -25,10 +25,17 @@ Note: You would need to have the AWS infrastructure illustrated in the System El
 ## AWS RESTAPI Gateway 
 Amazon API Gateway can be utilized as the secure endpoint. Used to send or receive dynamic content.
 
-## Lambda Custom Authorizer
+## Custom Authorizer
+
+### Approach 1. Lambda
 **handler**: authorizer.LambdaAuthorizerHandler
 
 Java Lambda function as a custom authorizer for API Gateway. It takes a request parameter or token and returns principalId and authPolicy.
+
+### Approach 2. Cognito 
+Cognito user pool: csa-users
+App client: csa-api-auth
+
 
 ## Endpoint lambda for DynamoDB CRUD operations
 Invoke URL: https://bmj9e26en4.execute-api.us-west-2.amazonaws.com/demo/user
