@@ -29,7 +29,6 @@ public class LambdaAuthorizerHandler implements RequestHandler<TokenAuthorizerCo
         } catch (Exception exception) {
             LOGGER.info(Level.INFO + "Unauthorized.");
             throw new RuntimeException("Unauthorized.");
-
         }
 
         // 401 Unauthorized: not recognized or invalid token
