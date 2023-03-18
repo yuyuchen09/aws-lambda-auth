@@ -27,7 +27,7 @@ public class LambdaAuthorizerHandler implements RequestHandler<TokenAuthorizerCo
             principalId = JWTUtil.getData(authorizationToken, "sub");
             userName = JWTUtil.getData(authorizationToken, "username");
         } catch (Exception exception) {
-            LOGGER.info(Level.INFO + "Unauthorized.");
+            LOGGER.info(Level.INFO + "Unauthorized." + exception.getMessage());
             throw new RuntimeException("Unauthorized.");
         }
 
